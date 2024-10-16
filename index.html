@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batsman Statistics</title>
+</head>
+<body>
+    <h1>Cricket Scores</h1>
+    Batsman Name: <input id="batsman" placeholder="Batsman Name"><br>
+    Balls Faced: <input id="balls" type="number" placeholder="Balls Faced"><br>
+    Runs Scored: <input id="runs" type="number" placeholder="Runs"><br>
+    <button onclick="addRow()">Add</button>
+    <button onclick="removeRow()">Remove Last</button>
+
+    <table border="1" id="table">
+        <tr>
+            <th>Name</th>
+            <th>Balls Faced</th>
+            <th>Runs</th>
+            <th>Strike Rate</th>
+        </tr>
+    </table>
+
+    <script>
+        function addRow() {
+            const table = document.getElementById("table");
+            const name = document.getElementById("batsman").value;
+            const runs = parseInt(document.getElementById("runs").value);
+            const balls = parseInt(document.getElementById("balls").value);
+
+            if (!name || !runs || !balls || balls <= 0) return;
+
+            const row = table.insertRow();
+            row.insertCell(0).innerText = name;
+            row.insertCell(1).innerText = balls;
+            row.insertCell(2).innerText = runs;
+            row.insertCell(3).innerText = ((runs / balls) * 100).toFixed(2);
+
+            // Clear inputs
+            document.getElementById("batsman").value = '';
+            document.getElementById("runs").value = '';
+            document.getElementById("balls").value = '';
+        }
+
+        function removeRow() {
+            const table = document.getElementById("table");
+            if (table.rows.length > 1) table.deleteRow(-1);
+        }
+    </script>
+</body>
+</html>
